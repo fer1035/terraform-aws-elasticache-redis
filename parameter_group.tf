@@ -9,10 +9,10 @@ resource "aws_elasticache_parameter_group" "parameter_group_nocluster" {
     value = "yes"
   }
 
-  parameter {
+  /* parameter {
     name  = "min-slaves-to-write"
     value = "2"
-  }
+  } */
 }
 
 resource "aws_elasticache_parameter_group" "parameter_group_cluster" {
@@ -26,10 +26,10 @@ resource "aws_elasticache_parameter_group" "parameter_group_cluster" {
     value = "yes"
   }
 
-  parameter {
+  /* parameter {
     name  = "min-slaves-to-write"
     value = "2"
-  }
+  } */
 
   parameter {
     name  = "cluster-enabled"
