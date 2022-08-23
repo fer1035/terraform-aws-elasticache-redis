@@ -156,7 +156,7 @@ variable "parameter_group_name" {
 variable "parameter_group_family" {
   type        = string
   description = "Family name of the parameter group."
-  default     = "redis"
+  default     = "redis6.x"
 }
 
 variable "log_group_name" {
