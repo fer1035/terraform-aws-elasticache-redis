@@ -7,7 +7,7 @@ resource "aws_elasticache_user" "user" {
 }
 
 resource "aws_elasticache_user_group" "group" {
-  engine        = upper(var.replication_group_engine)
+  engine        = upper(var.replication_group_engine_type)
   user_group_id = var.group_id
   user_ids      = [aws_elasticache_user.user.user_id]
 

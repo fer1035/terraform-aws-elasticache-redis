@@ -20,7 +20,7 @@ resource "aws_elasticache_replication_group" "replication_group_cluster_disabled
   engine_version            = var.replication_group_engine_version
   snapshot_retention_limit  = var.replication_group_snapshot_retention_limit
   final_snapshot_identifier = "${var.replication_group_id}-final-snapshot"
-  multi-az-enabled          = var.replication_group_multi_az
+  multi_az_enabled          = var.replication_group_multi_az
   notification_topic_arn    = aws_sns_topic.topic.arn
   security_group_ids        = var.replication_group_sgids
   subnet_group_name         = aws_elasticache_subnet_group.subnet_group.name
@@ -39,7 +39,6 @@ resource "aws_elasticache_replication_group" "replication_group_cluster_disabled
     destination_type  = "cloudwatch-logs"
     log_format        = "text"
     log_type          = "slow-log"
-    retention_in_days = var.log_group_retention
   }
   /* log_delivery_configuration {
     destination      = aws_kinesis_firehose_delivery_stream.example.name
@@ -65,9 +64,24 @@ resource "aws_elasticache_replication_group" "replication_group_cluster_enabled"
   parameter_group_name        = aws_elasticache_parameter_group.parameter_group_cluster[0].name
   automatic_failover_enabled  = var.replication_group_failover
   preferred_cache_cluster_azs = var.replication_group_cluster_azs
+  data_tiering_enabled        = var.replication_group_data_tiering
 
   num_node_groups         = var.replication_group_num_node_groups
   replicas_per_node_group = var.replication_group_num_replicas
+
+  at_rest_encryption_enabled = var.replication_group_at_rest_encryption
+  kms_key_id                 = var.replication_group_kms_id
+  transit_encryption_enabled = var.replication_group_transit_encryption
+  auth_token                 = var.replication_group_auth_token
+
+  engine                    = var.replication_group_engine_type
+  engine_version            = var.replication_group_engine_version
+  snapshot_retention_limit  = var.replication_group_snapshot_retention_limit
+  final_snapshot_identifier = "${var.replication_group_id}-final-snapshot"
+  multi_az_enabled          = var.replication_group_multi_az
+  notification_topic_arn    = aws_sns_topic.topic.arn
+  security_group_ids        = var.replication_group_sgids
+  subnet_group_name         = aws_elasticache_subnet_group.subnet_group.name
 
   apply_immediately          = var.replication_group_apply_immediately
   auto_minor_version_upgrade = var.replication_group_auto_minor_version_upgrade
@@ -79,7 +93,6 @@ resource "aws_elasticache_replication_group" "replication_group_cluster_enabled"
     destination_type  = "cloudwatch-logs"
     log_format        = "text"
     log_type          = "slow-log"
-    retention_in_days = var.log_group_retention
   }
 
   timeouts {
