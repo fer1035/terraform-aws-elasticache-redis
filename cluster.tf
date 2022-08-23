@@ -24,6 +24,6 @@ resource "aws_elasticache_cluster" "cluster_instance" {
 resource "aws_elasticache_cluster" "cluster_disabled" {
   count = var.cluster_mode == "cluster-disabled" ? 1 : 0
 
-  cluster_id           = "${aws_elasticache_replication_group_cluster_disabled[0].replication_group.id}-${count.index}"
-  replication_group_id = aws_elasticache_replication_group_cluster_disabled[0].replication_group.id
+  cluster_id           = "${aws_elasticache_replication_group.replication_group_cluster_disabled[0].replication_group_id}-${count.index}"
+  replication_group_id = aws_elasticache_replication_group.replication_group_cluster_disabled[0].replication_group_id
 }

@@ -2,7 +2,7 @@ resource "aws_elasticache_user" "user" {
   user_id       = var.user_id
   user_name     = var.user_name
   access_string = var.user_access_string
-  engine        = upper(var.replication_group_engine)
+  engine        = upper(var.replication_group_engine_type)
   passwords     = var.user_passwords
 }
 
