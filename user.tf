@@ -1,13 +1,14 @@
 resource "aws_elasticache_user" "user" {
-  user_id       = var.user_id
-  user_name     = var.user_name
-  access_string = var.user_access_string
-  engine        = upper(var.replication_group_engine_type)
-  passwords     = var.user_passwords
+  user_id              = var.user_id
+  user_name            = var.user_name
+  access_string        = var.user_access_string
+  engine               = "REDIS"
+  passwords            = var.user_passwords
+  no_password_required = var.user_no_password
 }
 
 resource "aws_elasticache_user_group" "group" {
-  engine        = upper(var.replication_group_engine_type)
+  engine        = "REDIS"
   user_group_id = var.group_id
   user_ids      = [aws_elasticache_user.user.user_id]
 
