@@ -17,6 +17,6 @@ resource "aws_elasticache_user_group" "group" {
 }
 
 resource "aws_elasticache_user_group_association" "user_group" {
-  user_group_id = aws_elasticache_user_group.group.group_id
+  user_group_id = aws_elasticache_user_group.group.user_group_id
   user_id       = aws_elasticache_user.user.user_id
 }
