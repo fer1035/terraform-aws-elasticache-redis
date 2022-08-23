@@ -180,7 +180,7 @@ variable "sns_topic_name" {
 variable "user_id" {
   type        = string
   description = "ID of the Redis user."
-  default     = "redisUserID"
+  default     = "redisuserid"
 }
 
 variable "user_name" {
@@ -210,5 +210,5 @@ variable "user_no_password" {
 variable "group_id" {
   type        = string
   description = "ID of the Redis user group."
-  default     = "redisGroupID"
+  default     = "redisgroupid"
 }
