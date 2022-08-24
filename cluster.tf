@@ -1,29 +1,29 @@
 resource "aws_elasticache_cluster" "cluster_instance" {
   count = var.cluster_mode == "instance" ? 1 : 0
 
-  availability_zone         = var.replication_group_cluster_azs[0]
-  cluster_id                = var.replication_group_id
-  final_snapshot_identifier = "${var.replication_group_id}-final-snapshot"
-  node_type                 = var.replication_group_node_type
+  availability_zone         = var.redis_cluster_azs[0]
+  cluster_id                = var.redis_id
+  final_snapshot_identifier = "${var.redis_id}-final-snapshot"
+  node_type                 = var.redis_node_type
   notification_topic_arn    = aws_sns_topic.topic.arn
   num_cache_nodes           = 1
   parameter_group_name      = aws_elasticache_parameter_group.parameter_group_nocluster[0].name
-  engine                    = var.replication_group_engine_type
-  engine_version            = var.replication_group_engine_version
-  snapshot_retention_limit  = var.replication_group_snapshot_retention_limit
-  port                      = var.replication_group_port
-  security_group_ids        = var.replication_group_sgids
+  engine                    = var.redis_engine_type
+  engine_version            = var.redis_engine_version
+  snapshot_retention_limit  = var.redis_snapshot_retention_limit
+  port                      = var.redis_port
+  security_group_ids        = var.redis_sgids
   subnet_group_name         = aws_elasticache_subnet_group.subnet_group.name
 
-  apply_immediately          = var.replication_group_apply_immediately
-  auto_minor_version_upgrade = var.replication_group_auto_minor_version_upgrade
-  maintenance_window         = var.replication_group_maintenance_window
-  snapshot_window            = var.replication_group_snapshot_window
+  apply_immediately          = var.redis_apply_immediately
+  auto_minor_version_upgrade = var.redis_auto_minor_version_upgrade
+  maintenance_window         = var.redis_maintenance_window
+  snapshot_window            = var.redis_snapshot_window
 }
 
 resource "aws_elasticache_cluster" "cluster_disabled" {
   count = var.cluster_mode == "cluster-disabled" ? 1 : 0
 
-  cluster_id           = "${aws_elasticache_replication_group.replication_group_cluster_disabled[0].replication_group_id}-${count.index}"
-  replication_group_id = aws_elasticache_replication_group.replication_group_cluster_disabled[0].replication_group_id
+  cluster_id           = "${aws_elasticache_replication_group.redis_cluster_disabled[0].redis_id}-${count.index}"
+  redis_id = aws_elasticache_replication_group.redis_cluster_disabled[0].redis_id
 }

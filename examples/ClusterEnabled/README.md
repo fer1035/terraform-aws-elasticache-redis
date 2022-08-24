@@ -2,4 +2,4 @@
 
 Example for:
 
-- Cluster-enabled mode.
+- Cluster-enabled

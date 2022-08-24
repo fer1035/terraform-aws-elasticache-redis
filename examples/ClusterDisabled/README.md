@@ -2,5 +2,5 @@
 
 Example for:
 
-- Single read replica
-- Cluster-disabled mode.
+- Replication group
+- Cluster-disabled

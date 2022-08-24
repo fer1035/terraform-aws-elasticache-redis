@@ -10,138 +10,138 @@ variable "cluster_mode" {
   default     = "instance"
 }
 
-variable "replication_group_id" {
+variable "redis_id" {
   type        = string
   description = "Redis cluster replication group ID."
   default     = "tf-redis-cluster-rep-grp"
 }
 
-variable "replication_group_node_type" {
+variable "redis_node_type" {
   type        = string
   description = "Node type of the replication group."
   default     = "cache.t2.small"
 }
 
-variable "replication_group_port" {
+variable "redis_port" {
   type        = number
   description = "Port of the replication group."
   default     = 6379
 }
 
-variable "replication_group_failover" {
+variable "redis_failover" {
   type        = bool
   description = "Whether to enable replication group failover with multi-AZ. Ignored if using \"instance\" cluster_mode."
   default     = true
 }
 
-variable "replication_group_multi_az" {
+variable "redis_multi_az" {
   type        = bool
-  description = "Whether to enable replication group multi-AZ. Must correspond with replication_group_failover."
+  description = "Whether to enable replication group multi-AZ. Must correspond with redis_failover."
   default     = true
 }
 
-variable "replication_group_cluster_azs" {
+variable "redis_cluster_azs" {
   type        = list(string)
   description = "List of preferred cache cluster Availability Zones. The first value will be used for Primary node and AZ for \"instance\" cluster_mode."
   default     = ["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d", "us-east-1e", "us-east-1f"]
 }
 
-variable "replication_group_num_node_groups" {
+variable "redis_num_node_groups" {
   type        = number
   description = "Number of node groups for the replication group. Only for \"cluster-enabled\" cluster_mode."
   default     = 2
 }
 
-variable "replication_group_num_cache_clusters" {
+variable "redis_num_cache_clusters" {
   type        = number
   description = "Number of cache clusters for the replication group. Only for \"cluster-disabled\" cluster_mode."
   default     = 2
 }
 
-variable "replication_group_num_replicas" {
+variable "redis_num_replicas" {
   type        = number
   description = "Number of replicas in each node group for the replication group. Ignored if using \"instance\" cluster_mode."
   default     = 1
 }
 
-variable "replication_group_apply_immediately" {
+variable "redis_apply_immediately" {
   type        = bool
   description = "Whether to apply changes immediately or during next maintenance window."
   default     = false
 }
 
-variable "replication_group_auto_minor_version_upgrade" {
+variable "redis_auto_minor_version_upgrade" {
   type        = bool
   description = "Whether to automatically upgrade minor cache cluster version during next maintenance window."
   default     = true
 }
 
-variable "replication_group_maintenance_window" {
+variable "redis_maintenance_window" {
   type        = string
   description = "Maintenance window for the replication group cache cluster."
   default     = "tue:06:30-tue:07:30"
 }
 
-variable "replication_group_snapshot_window" {
+variable "redis_snapshot_window" {
   type        = string
   description = "Daily time range to take snapshots."
   default     = "01:00-02:00"
 }
 
-variable "replication_group_sgids" {
+variable "redis_sgids" {
   type        = list(string)
   description = "List of Security Groups to attach to the Redis application."
   default     = null
 }
 
-variable "replication_group_subnet_ids" {
+variable "redis_subnet_ids" {
   type        = list(string)
   description = "List of Subnet IDs in which to create the Redis application."
 }
 
-variable "replication_group_at_rest_encryption" {
+variable "redis_at_rest_encryption" {
   type        = bool
   description = "whether to enable encryption at rest for cache data."
   default     = false
 }
 
-variable "replication_group_kms_id" {
+variable "redis_kms_id" {
   type        = string
   description = "KMS key ID for at rest encryption."
   default     = null
 }
 
-variable "replication_group_transit_encryption" {
+variable "redis_transit_encryption" {
   type        = bool
   description = "Whether to enable encryption in transit for cache data."
   default     = false
 }
 
-variable "replication_group_auth_token" {
+variable "redis_auth_token" {
   type        = string
   description = "Password to use with protected servers if transit_encryption_enabled is true."
   default     = null
 }
 
-variable "replication_group_data_tiering" {
+variable "redis_data_tiering" {
   type        = bool
   description = "Whether to enable data tiering. Only available and must be set for r6gd node types."
   default     = false
 }
 
-variable "replication_group_engine_type" {
+variable "redis_engine_type" {
   type        = string
   description = "Cluster engine type. Onlu \"redis\" is supported."
   default     = "redis"
 }
 
-variable "replication_group_engine_version" {
+variable "redis_engine_version" {
   type        = string
   description = "Cluster engine version. Unspecifying this gives the latest."
   default     = null
 }
 
-variable "replication_group_snapshot_retention_limit" {
+variable "redis_snapshot_retention_limit" {
   type        = number
   description = "Number of days to keep the cache snapshot. 0 disables backup."
   default     = 30

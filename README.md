@@ -6,5 +6,5 @@ A Terraform module to provision AWS ElastiCache Redis application.
 
 - Allows provisioning of different Redis application types:
     - Single instance
-    - Single read replica (cluster-disabled)
+    - Replication group (cluster-disabled)
     - Cluster-enabled

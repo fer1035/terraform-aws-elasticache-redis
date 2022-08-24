@@ -1,5 +1,5 @@
 resource "aws_iam_role" "iam_role" {
-  name = "redis_${var.replication_group_id}_role"
+  name = "redis_${var.redis_id}_role"
   /* managed_policy_arns = null */
   assume_role_policy = <<EOF
 {
@@ -17,7 +17,7 @@ resource "aws_iam_role" "iam_role" {
 }
 EOF
   inline_policy {
-    name = "redis_${var.replication_group_id}_policy"
+    name = "redis_${var.redis_id}_policy"
     policy = jsonencode({
       Version = "2012-10-17"
       Statement = [
