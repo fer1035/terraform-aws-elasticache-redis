@@ -1,7 +1,7 @@
 resource "aws_elasticache_replication_group" "redis_cluster_disabled" {
   count = var.cluster_mode == "cluster-disabled" ? 1 : 0
 
-  redis_id        = var.redis_id
+  replication_group_id        = var.redis_id
   description                 = var.description
   node_type                   = var.redis_node_type
   port                        = var.redis_port
@@ -57,7 +57,7 @@ resource "aws_elasticache_replication_group" "redis_cluster_disabled" {
 resource "aws_elasticache_replication_group" "redis_cluster_enabled" {
   count = var.cluster_mode == "cluster-enabled" ? 1 : 0
 
-  redis_id        = var.redis_id
+  replication_group_id        = var.redis_id
   description                 = var.description
   node_type                   = var.redis_node_type
   port                        = var.redis_port

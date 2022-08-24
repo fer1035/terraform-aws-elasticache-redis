@@ -12,55 +12,55 @@ variable "cluster_mode" {
 
 variable "redis_id" {
   type        = string
-  description = "Redis cluster replication group ID."
-  default     = "tf-redis-cluster-rep-grp"
+  description = "Redis application ID."
+  default     = "tf-redis"
 }
 
 variable "redis_node_type" {
   type        = string
-  description = "Node type of the replication group."
+  description = "Node type."
   default     = "cache.t2.small"
 }
 
 variable "redis_port" {
   type        = number
-  description = "Port of the replication group."
+  description = "Redis connection port."
   default     = 6379
 }
 
 variable "redis_failover" {
   type        = bool
-  description = "Whether to enable replication group failover with multi-AZ. Ignored if using \"instance\" cluster_mode."
+  description = "Whether to enable failover with multi-AZ. Ignored if using \"instance\" cluster_mode."
   default     = true
 }
 
 variable "redis_multi_az" {
   type        = bool
-  description = "Whether to enable replication group multi-AZ. Must correspond with redis_failover."
+  description = "Whether to enable multi-AZ. Must correspond with redis_failover."
   default     = true
 }
 
 variable "redis_cluster_azs" {
   type        = list(string)
-  description = "List of preferred cache cluster Availability Zones. The first value will be used for Primary node and AZ for \"instance\" cluster_mode."
+  description = "List of preferred Availability Zones. The first value will be used for Primary node and AZ for \"instance\" cluster_mode."
   default     = ["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d", "us-east-1e", "us-east-1f"]
 }
 
 variable "redis_num_node_groups" {
   type        = number
-  description = "Number of node groups for the replication group. Only for \"cluster-enabled\" cluster_mode."
+  description = "Number of node groups. Only for \"cluster-enabled\" cluster_mode."
   default     = 2
 }
 
 variable "redis_num_cache_clusters" {
   type        = number
-  description = "Number of cache clusters for the replication group. Only for \"cluster-disabled\" cluster_mode."
+  description = "Number of cache clusters. Only for \"cluster-disabled\" cluster_mode."
   default     = 2
 }
 
 variable "redis_num_replicas" {
   type        = number
-  description = "Number of replicas in each node group for the replication group. Ignored if using \"instance\" cluster_mode."
+  description = "Number of replicas in each node group. Ignored if using \"instance\" cluster_mode."
   default     = 1
 }
 
@@ -78,7 +78,7 @@ variable "redis_auto_minor_version_upgrade" {
 
 variable "redis_maintenance_window" {
   type        = string
-  description = "Maintenance window for the replication group cache cluster."
+  description = "Maintenance window."
   default     = "tue:06:30-tue:07:30"
 }
 
@@ -101,7 +101,7 @@ variable "redis_subnet_ids" {
 
 variable "redis_at_rest_encryption" {
   type        = bool
-  description = "whether to enable encryption at rest for cache data."
+  description = "Whether to enable encryption at rest for cache data."
   default     = false
 }
 
@@ -131,13 +131,13 @@ variable "redis_data_tiering" {
 
 variable "redis_engine_type" {
   type        = string
-  description = "Cluster engine type. Onlu \"redis\" is supported."
+  description = "Cluster engine type. Only \"redis\" is supported."
   default     = "redis"
 }
 
 variable "redis_engine_version" {
   type        = string
-  description = "Cluster engine version. Unspecifying this gives the latest."
+  description = "Redis engine version. Unspecifying this gives the latest."
   default     = null
 }
 
