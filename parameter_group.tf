@@ -33,6 +33,6 @@ resource "aws_elasticache_parameter_group" "parameter_group_cluster" {
 
   parameter {
     name  = "cluster-enabled"
-    value = true
+    value = "yes"
   }
 }
