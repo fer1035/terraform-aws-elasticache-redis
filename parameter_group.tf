@@ -1,7 +1,7 @@
 resource "aws_elasticache_parameter_group" "parameter_group_nocluster" {
   count = var.cluster_mode != "cluster-enabled" ? 1 : 0
 
-  name   = var.parameter_group_name
+  name   = "${var.parameter_group_name}-nocluster"
   family = var.parameter_group_family
 
   parameter {
@@ -18,7 +18,7 @@ resource "aws_elasticache_parameter_group" "parameter_group_nocluster" {
 resource "aws_elasticache_parameter_group" "parameter_group_cluster" {
   count = var.cluster_mode == "cluster-enabled" ? 1 : 0
 
-  name   = var.parameter_group_name
+  name   = "${var.parameter_group_name}-cluster"
   family = var.parameter_group_family
 
   parameter {
