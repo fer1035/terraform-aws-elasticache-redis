@@ -19,6 +19,13 @@ resource "aws_elasticache_cluster" "cluster_instance" {
   auto_minor_version_upgrade = var.redis_auto_minor_version_upgrade
   maintenance_window         = var.redis_maintenance_window
   snapshot_window            = var.redis_snapshot_window
+
+  log_delivery_configuration {
+    destination       = aws_cloudwatch_log_group.log_group.name
+    destination_type  = "cloudwatch-logs"
+    log_format        = "text"
+    log_type          = "slow-log"
+  }
 }
 
 resource "aws_elasticache_cluster" "cluster_disabled" {
@@ -26,4 +33,11 @@ resource "aws_elasticache_cluster" "cluster_disabled" {
 
   cluster_id           = "${aws_elasticache_replication_group.redis_cluster_disabled[0].replication_group_id}-${count.index}"
   replication_group_id = aws_elasticache_replication_group.redis_cluster_disabled[0].replication_group_id
+
+  log_delivery_configuration {
+    destination       = aws_cloudwatch_log_group.log_group.name
+    destination_type  = "cloudwatch-logs"
+    log_format        = "text"
+    log_type          = "slow-log"
+  }
 }
