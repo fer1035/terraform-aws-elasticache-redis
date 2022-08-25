@@ -27,13 +27,3 @@ output "cluster_enabled_redis_member_clusters" {
   description = "Member clusters of the \"cluster-enabled\" replication group."
   value       = length(aws_elasticache_replication_group.redis_cluster_enabled) > 0 ? aws_elasticache_replication_group.redis_cluster_enabled[*].member_clusters : null
 }
-
-output "cluster_enabled_redis_primary_endpoint" {
-  description = "Primary endpoint address of the \"cluster-enabled\" replication group."
-  value       = length(aws_elasticache_replication_group.redis_cluster_enabled) > 0 ? aws_elasticache_replication_group.redis_cluster_enabled[*].primary_endpoint_address : null
-}
-
-output "cluster_enabled_redis_reader_endpoint" {
-  description = "Reader endpoint address of the \"cluster-enabled\" replication group."
-  value       = length(aws_elasticache_replication_group.redis_cluster_enabled) > 0 ? aws_elasticache_replication_group.redis_cluster_enabled[*].reader_endpoint_address : null
-}

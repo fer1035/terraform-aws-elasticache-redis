@@ -18,11 +18,6 @@ output "cluster_disabled_redis_cluster_enabled" {
   value       = length(aws_elasticache_replication_group.redis_cluster_disabled) > 0 ? aws_elasticache_replication_group.redis_cluster_disabled[*].cluster_enabled : null
 }
 
-output "cluster_disabled_redis_config_endpoint" {
-  description = "Configuration endpoint address of the \"cluster-disabled\" replication group."
-  value       = length(aws_elasticache_replication_group.redis_cluster_disabled) > 0 ? aws_elasticache_replication_group.redis_cluster_disabled[*].configuration_endpoint_address : null
-}
-
 output "cluster_disabled_redis_member_clusters" {
   description = "Member clusters of the \"cluster-disabled\" replication group."
   value       = length(aws_elasticache_replication_group.redis_cluster_disabled) > 0 ? aws_elasticache_replication_group.redis_cluster_disabled[*].member_clusters : null
