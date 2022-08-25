@@ -63,7 +63,7 @@ resource "aws_elasticache_replication_group" "redis_cluster_enabled" {
   port                        = var.redis_port
   parameter_group_name        = aws_elasticache_parameter_group.parameter_group_cluster[0].name
   automatic_failover_enabled  = var.redis_failover
-  preferred_cache_cluster_azs = var.redis_cluster_azs
+  /* preferred_cache_cluster_azs = var.redis_cluster_azs */
   data_tiering_enabled        = var.redis_data_tiering
 
   num_node_groups         = var.redis_num_node_groups
