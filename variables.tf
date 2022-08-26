@@ -157,13 +157,13 @@ variable "redis_metric_datapoints" {
 variable "redis_metric_type_replicas" {
   type        = string
   description = "Replica metric type to monitor for \"cluster-enabled\" autoscaling. Valid values are \"ElastiCachePrimaryEngineCPUUtilization\", \"ElastiCacheReplicaEngineCPUUtilization\", or \"ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage\"."
-  default     = "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage"
+  default     = "ElastiCacheReplicaEngineCPUUtilization"
 }
 
 variable "redis_metric_type_node_groups" {
   type        = string
   description = "Node group metric type to monitor for \"cluster-enabled\" autoscaling. Valid value currently is \"ElastiCacheReplicaEngineCPUUtilization\"."
-  default     = "ElastiCacheReplicaEngineCPUUtilization"
+  default     = "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage"
 }
 
 variable "redis_alarm_enabled" {
