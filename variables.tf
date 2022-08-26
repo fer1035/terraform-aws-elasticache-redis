@@ -10,6 +10,12 @@ variable "cluster_mode" {
   default     = "instance"
 }
 
+variable "autoscaling_enabled" {
+  type        = bool
+  description = "Whether to create autoscaling for \"cluster-enabled\" cluster_mode."
+  default     = false
+}
+
 variable "redis_id" {
   type        = string
   description = "Redis application ID."
