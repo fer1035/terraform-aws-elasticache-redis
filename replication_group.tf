@@ -88,6 +88,10 @@ resource "aws_elasticache_replication_group" "redis_cluster_enabled" {
   maintenance_window         = var.redis_maintenance_window
   snapshot_window            = var.redis_snapshot_window
 
+  lifecycle {
+    ignore_changes = [num_node_groups, replicas_per_node_group]
+  }
+
   log_delivery_configuration {
     destination       = aws_cloudwatch_log_group.log_group.name
     destination_type  = "cloudwatch-logs"
