@@ -136,9 +136,15 @@ variable "redis_metric_threshold" {
   default     = "100"
 }
 
-variable "redis_metric_name" {
+variable "redis_metric_name_replicas" {
   type        = string
-  description = "Metric naame for \"cluster-enabled\" autoscaling."
+  description = "Replica metric naame for \"cluster-enabled\" autoscaling."
+  default     = "ReplicaEngineCPUUtilization"
+}
+
+variable "redis_metric_name_node_groups" {
+  type        = string
+  description = "Node group metric naame for \"cluster-enabled\" autoscaling."
   default     = "DatabaseMemoryUsageCountedForEvictPercentage"
 }
 
@@ -148,10 +154,16 @@ variable "redis_metric_datapoints" {
   default     = "3"
 }
 
-variable "redis_metric_type" {
+variable "redis_metric_type_replicas" {
   type        = string
-  description = "Metric type to monitor for \"cluster-enabled\" autoscaling. Valid values are \"ElastiCachePrimaryEngineCPUUtilization\", \"ElastiCacheReplicaEngineCPUUtilization\", or \"ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage\"."
+  description = "Replica metric type to monitor for \"cluster-enabled\" autoscaling. Valid values are \"ElastiCachePrimaryEngineCPUUtilization\", \"ElastiCacheReplicaEngineCPUUtilization\", or \"ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage\"."
   default     = "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage"
+}
+
+variable "redis_metric_type_node_groups" {
+  type        = string
+  description = "Node group metric type to monitor for \"cluster-enabled\" autoscaling. Valid value currently is \"ElastiCacheReplicaEngineCPUUtilization\"."
+  default     = "ElastiCacheReplicaEngineCPUUtilization"
 }
 
 variable "redis_alarm_enabled" {
