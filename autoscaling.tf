@@ -1,4 +1,6 @@
 resource "aws_appautoscaling_target" "replicas" {
+  count = var.autoscaling_enabled == true ? 1 : 0
+
   service_namespace  = "elasticache"
   scalable_dimension = "elasticache:replication-group:Replicas"
   resource_id        = "replication-group/${var.redis_id}-cluster"
@@ -11,10 +13,12 @@ resource "aws_appautoscaling_target" "replicas" {
 }
 
 resource "aws_appautoscaling_policy" "replicas" {
+  count = var.autoscaling_enabled == true ? 1 : 0
+
   name               = "redis-auto-scaling"
-  service_namespace  = aws_appautoscaling_target.replicas.service_namespace
-  scalable_dimension = aws_appautoscaling_target.replicas.scalable_dimension
-  resource_id        = aws_appautoscaling_target.replicas.resource_id
+  service_namespace  = aws_appautoscaling_target.replicas[0].service_namespace
+  scalable_dimension = aws_appautoscaling_target.replicas[0].scalable_dimension
+  resource_id        = aws_appautoscaling_target.replicas[0].resource_id
   policy_type        = "TargetTrackingScaling"
 
   target_tracking_scaling_policy_configuration {
@@ -30,6 +34,8 @@ resource "aws_appautoscaling_policy" "replicas" {
 }
 
 resource "aws_appautoscaling_target" "shards" {
+  count = var.autoscaling_enabled == true ? 1 : 0
+
   service_namespace  = "elasticache"
   scalable_dimension = "elasticache:replication-group:NodeGroups"
   resource_id        = "replication-group/${var.redis_id}-cluster"
@@ -42,10 +48,12 @@ resource "aws_appautoscaling_target" "shards" {
 }
 
 resource "aws_appautoscaling_policy" "shards" {
+  count = var.autoscaling_enabled == true ? 1 : 0
+
   name               = "redis-auto-scaling"
-  service_namespace  = aws_appautoscaling_target.shards.service_namespace
-  scalable_dimension = aws_appautoscaling_target.shards.scalable_dimension
-  resource_id        = aws_appautoscaling_target.shards.resource_id
+  service_namespace  = aws_appautoscaling_target.shards[0].service_namespace
+  scalable_dimension = aws_appautoscaling_target.shards[0].scalable_dimension
+  resource_id        = aws_appautoscaling_target.shards[0].resource_id
   policy_type        = "TargetTrackingScaling"
 
   target_tracking_scaling_policy_configuration {
@@ -61,6 +69,8 @@ resource "aws_appautoscaling_policy" "shards" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "alarm" {
+  count = var.autoscaling_enabled == true ? 1 : 0
+
   alarm_name          = var.log_group_name
   comparison_operator = var.redis_metric_operator
   evaluation_periods  = var.redis_evaluation_periods
@@ -72,6 +82,6 @@ resource "aws_cloudwatch_metric_alarm" "alarm" {
   actions_enabled     = var.redis_alarm_enabled
   datapoints_to_alarm = var.redis_metric_datapoints
   alarm_description   = var.description
-  alarm_actions       = [aws_appautoscaling_policy.replicas.arn, aws_appautoscaling_policy.shards.arn]
-  ok_actions          = [aws_appautoscaling_policy.replicas.arn, aws_appautoscaling_policy.shards.arn]
+  alarm_actions       = [aws_appautoscaling_policy.replicas[0].arn, aws_appautoscaling_policy.shards[0].arn]
+  ok_actions          = [aws_appautoscaling_policy.replicas[0].arn, aws_appautoscaling_policy.shards[0].arn]
 }
