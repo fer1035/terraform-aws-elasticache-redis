@@ -71,7 +71,7 @@ resource "aws_appautoscaling_policy" "shards" {
 /* resource "aws_cloudwatch_metric_alarm" "alarm_replicas" {
   count = var.autoscaling_enabled == true ? 1 : 0
 
-  alarm_name          = var.log_group_name
+  alarm_name          = "${var.log_group_name}-replicas"
   comparison_operator = var.redis_metric_operator
   evaluation_periods  = var.redis_evaluation_periods
   metric_name         = var.redis_metric_name_replicas
@@ -89,7 +89,7 @@ resource "aws_appautoscaling_policy" "shards" {
 resource "aws_cloudwatch_metric_alarm" "alarm_node_groups" {
   count = var.autoscaling_enabled == true ? 1 : 0
 
-  alarm_name          = var.log_group_name
+  alarm_name          = "${var.log_group_name}-node-groups"
   comparison_operator = var.redis_metric_operator
   evaluation_periods  = var.redis_evaluation_periods
   metric_name         = var.redis_metric_name_node_groups
