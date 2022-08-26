@@ -82,9 +82,15 @@ variable "redis_max_replicas" {
   default     = 5
 }
 
-variable "redis_trigger_percent" {
+variable "redis_trigger_percent_replicas" {
   type        = number
-  description = "Percentage amount to trigger for \"cluster-enabled\" autoscaling."
+  description = "Replica CPU utilization percentage amount to trigger for \"cluster-enabled\" autoscaling."
+  default     = 65
+}
+
+variable "redis_trigger_percent_node_groups" {
+  type        = number
+  description = "Node group database memory percentage amount to trigger for \"cluster-enabled\" autoscaling."
   default     = 75
 }
 

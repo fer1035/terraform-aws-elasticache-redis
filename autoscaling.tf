@@ -26,7 +26,7 @@ resource "aws_appautoscaling_policy" "replicas" {
       predefined_metric_type = var.redis_metric_type_replicas
     }
 
-    target_value       = var.redis_trigger_percent
+    target_value       = var.redis_trigger_percent_replicas
     disable_scale_in   = var.redis_disable_scalein
     scale_in_cooldown  = var.redis_scalein_cooldown_seconds
     scale_out_cooldown = var.redis_scaleout_cooldown_seconds
@@ -61,7 +61,7 @@ resource "aws_appautoscaling_policy" "shards" {
       predefined_metric_type = var.redis_metric_type_node_groups
     }
 
-    target_value       = var.redis_trigger_percent
+    target_value       = var.redis_trigger_percent_node_groups
     disable_scale_in   = var.redis_disable_scalein
     scale_in_cooldown  = var.redis_scalein_cooldown_seconds
     scale_out_cooldown = var.redis_scaleout_cooldown_seconds
