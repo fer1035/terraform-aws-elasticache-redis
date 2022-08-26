@@ -73,7 +73,7 @@ variable "redis_max_node_groups" {
 variable "redis_max_replicas" {
   type        = number
   description = "Maximum number of replicas in a node group for \"cluster-enabled\" autoscaling."
-  default     = 10
+  default     = 5
 }
 
 variable "redis_trigger_percent" {

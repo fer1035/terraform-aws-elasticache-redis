@@ -3,7 +3,11 @@ resource "aws_appautoscaling_target" "replicas" {
   scalable_dimension = "elasticache:replication-group:Replicas"
   resource_id        = "replication-group/${var.redis_id}-cluster"
   min_capacity       = var.redis_num_replicas
-  max_capacity       = var.redis_max_node_groups
+  max_capacity       = var.redis_max_replicas
+
+  depends_on = [
+    aws_elasticache_replication_group.redis_cluster_enabled
+  ]
 }
 
 resource "aws_appautoscaling_policy" "replicas" {
@@ -30,7 +34,11 @@ resource "aws_appautoscaling_target" "shards" {
   scalable_dimension = "elasticache:replication-group:NodeGroups"
   resource_id        = "replication-group/${var.redis_id}-cluster"
   min_capacity       = var.redis_num_node_groups
-  max_capacity       = var.redis_max_replicas
+  max_capacity       = var.redis_max_node_groups
+
+  depends_on = [
+    aws_elasticache_replication_group.redis_cluster_enabled
+  ]
 }
 
 resource "aws_appautoscaling_policy" "shards" {
