@@ -121,7 +121,7 @@ variable "redis_metric_operator" {
 variable "redis_evaluation_periods" {
   type        = string
   description = "Metric evaluation period for \"cluster-enabled\" autoscaling."
-  default     = "2"
+  default     = "3"
 }
 
 variable "redis_period_seconds" {
@@ -157,7 +157,7 @@ variable "redis_metric_name_node_groups" {
 variable "redis_metric_datapoints" {
   type        = string
   description = "Number of datapoints to alarm for \"cluster-enabled\" autoscaling."
-  default     = "3"
+  default     = "2"
 }
 
 variable "redis_metric_type_replicas" {
