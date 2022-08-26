@@ -68,7 +68,7 @@ resource "aws_appautoscaling_policy" "shards" {
   }
 }
 
-resource "aws_cloudwatch_metric_alarm" "alarm_replicas" {
+/* resource "aws_cloudwatch_metric_alarm" "alarm_replicas" {
   count = var.autoscaling_enabled == true ? 1 : 0
 
   alarm_name          = var.log_group_name
@@ -102,4 +102,4 @@ resource "aws_cloudwatch_metric_alarm" "alarm_node_groups" {
   alarm_description   = var.description
   alarm_actions       = [aws_appautoscaling_policy.replicas[0].arn, aws_appautoscaling_policy.shards[0].arn]
   ok_actions          = [aws_appautoscaling_policy.replicas[0].arn, aws_appautoscaling_policy.shards[0].arn]
-}
+} */
