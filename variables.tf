@@ -12,7 +12,7 @@ variable "cluster_mode" {
 
 variable "autoscaling_enabled" {
   type        = bool
-  description = "Whether to create autoscaling for \"cluster-enabled\" cluster_mode."
+  description = "Whether to create autoscaling for \"cluster-enabled\" cluster_mode. Refer to autoscaling special notes in the README."
   default     = false
 }
 
