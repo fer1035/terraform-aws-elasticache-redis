@@ -121,7 +121,7 @@ variable "redis_period_seconds" {
 variable "redis_metric_statistic" {
   type        = string
   description = "Metric statistic type for \"cluster-enabled\" autoscaling."
-  default     = "minimum"
+  default     = "Minimum"
 }
 
 variable "redis_metric_threshold" {
