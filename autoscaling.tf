@@ -23,7 +23,7 @@ resource "aws_appautoscaling_policy" "replicas" {
 
   target_tracking_scaling_policy_configuration {
     predefined_metric_specification {
-      predefined_metric_type = var.redis_metric_type
+      predefined_metric_type = var.redis_metric_type_replicas
     }
 
     target_value       = var.redis_trigger_percent
@@ -58,7 +58,7 @@ resource "aws_appautoscaling_policy" "shards" {
 
   target_tracking_scaling_policy_configuration {
     predefined_metric_specification {
-      predefined_metric_type = var.redis_metric_type
+      predefined_metric_type = var.redis_metric_type_node_groups
     }
 
     target_value       = var.redis_trigger_percent
@@ -68,13 +68,31 @@ resource "aws_appautoscaling_policy" "shards" {
   }
 }
 
-resource "aws_cloudwatch_metric_alarm" "alarm" {
+resource "aws_cloudwatch_metric_alarm_replicas" "alarm_replicas" {
   count = var.autoscaling_enabled == true ? 1 : 0
 
   alarm_name          = var.log_group_name
   comparison_operator = var.redis_metric_operator
   evaluation_periods  = var.redis_evaluation_periods
-  metric_name         = var.redis_metric_name
+  metric_name         = var.redis_metric_name_replicas
+  namespace           = "AWS/ElastiCache"
+  period              = var.redis_period_seconds
+  statistic           = var.redis_metric_statistic
+  threshold           = var.redis_metric_threshold
+  actions_enabled     = var.redis_alarm_enabled
+  datapoints_to_alarm = var.redis_metric_datapoints
+  alarm_description   = var.description
+  alarm_actions       = [aws_appautoscaling_policy.replicas[0].arn, aws_appautoscaling_policy.shards[0].arn]
+  ok_actions          = [aws_appautoscaling_policy.replicas[0].arn, aws_appautoscaling_policy.shards[0].arn]
+}
+
+resource "aws_cloudwatch_metric_alarm_node_groups" "alarm_node_groups" {
+  count = var.autoscaling_enabled == true ? 1 : 0
+
+  alarm_name          = var.log_group_name
+  comparison_operator = var.redis_metric_operator
+  evaluation_periods  = var.redis_evaluation_periods
+  metric_name         = var.redis_metric_name_node_groups
   namespace           = "AWS/ElastiCache"
   period              = var.redis_period_seconds
   statistic           = var.redis_metric_statistic
