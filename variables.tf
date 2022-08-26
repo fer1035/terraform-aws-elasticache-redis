@@ -261,6 +261,11 @@ variable "redis_snapshot_retention_limit" {
   default     = 30
 }
 
+variable "redis_final_snapshot_name" {
+  type        = string
+  description = "Name of the final snapshot for the Redis cache data. Must be unique."
+}
+
 variable "parameter_group_name" {
   type        = string
   description = "Name of the parameter group."
