@@ -46,22 +46,112 @@ variable "redis_cluster_azs" {
   default     = ["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d", "us-east-1e", "us-east-1f"]
 }
 
-variable "redis_num_node_groups" {
-  type        = number
-  description = "Number of node groups. Only for \"cluster-enabled\" cluster_mode."
-  default     = 2
-}
-
 variable "redis_num_cache_clusters" {
   type        = number
   description = "Number of cache clusters. Only for \"cluster-disabled\" cluster_mode."
   default     = 2
 }
 
+variable "redis_num_node_groups" {
+  type        = number
+  description = "Number of node groups, also minimun count for \"cluster-enabled\" autoscaling. Only for \"cluster-enabled\" cluster_mode."
+  default     = 2
+}
+
 variable "redis_num_replicas" {
   type        = number
-  description = "Number of replicas in each node group. Ignored if using \"instance\" cluster_mode."
+  description = "Number of replicas in each node group, also minimum count for \"cluster-enabled\" autoscaling. Ignored if using \"instance\" cluster_mode."
   default     = 1
+}
+
+variable "redis_max_node_groups" {
+  type        = number
+  description = "Maximum number of node groups for \"cluster-enabled\" autoscaling."
+  default     = 10
+}
+
+variable "redis_max_replicas" {
+  type        = number
+  description = "Maximum number of replicas in a node group for \"cluster-enabled\" autoscaling."
+  default     = 10
+}
+
+variable "redis_trigger_percent" {
+  type        = number
+  description = "Percentage amount to trigger for \"cluster-enabled\" autoscaling."
+  default     = 75
+}
+
+variable "redis_scalein_cooldown_seconds" {
+  type        = number
+  description = "Autoscaling scale-in cooldown period in seconds for \"cluster-enabled\" autoscaling."
+  default     = 300
+}
+
+variable "redis_scaleout_cooldown_seconds" {
+  type        = number
+  description = "Autoscaling scale-out cooldown period in seconds for \"cluster-enabled\" autoscaling."
+  default     = 300
+}
+
+variable "redis_disable_scalein" {
+  type        = bool
+  description = "Whether to disable automatic scale-in for \"cluster-enabled\" autoscaling."
+  default     = false
+}
+
+variable "redis_metric_operator" {
+  type        = string
+  description = "Metric comparison operator for \"cluster-enabled\" autoscaling."
+  default     = "GreaterThanOrEqualToThreshold"
+}
+
+variable "redis_evaluation_periods" {
+  type        = string
+  description = "Metric evaluation period for \"cluster-enabled\" autoscaling."
+  default     = "2"
+}
+
+variable "redis_period_seconds" {
+  type        = string
+  description = "Period duration in seconds for \"cluster-enabled\" autoscaling."
+  default     = "120"
+}
+
+variable "redis_metric_statistic" {
+  type        = string
+  description = "Metric statistic type for \"cluster-enabled\" autoscaling."
+  default     = "minimum"
+}
+
+variable "redis_metric_threshold" {
+  type        = string
+  description = "Metric statistic threshold for \"cluster-enabled\" autoscaling."
+  default     = "100"
+}
+
+variable "redis_metric_name" {
+  type        = string
+  description = "Metric naame for \"cluster-enabled\" autoscaling."
+  default     = "DatabaseMemoryUsageCountedForEvictPercentage"
+}
+
+variable "redis_metric_datapoints" {
+  type        = string
+  description = "Number of datapoints to alarm for \"cluster-enabled\" autoscaling."
+  default     = "3"
+}
+
+variable "redis_metric_type" {
+  type        = string
+  description = "Metric type to monitor for \"cluster-enabled\" autoscaling. Valid values are \"ElastiCachePrimaryEngineCPUUtilization\", \"ElastiCacheReplicaEngineCPUUtilization\", or \"ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage\"."
+  default     = "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage"
+}
+
+variable "redis_alarm_enabled" {
+  type        = bool
+  description = "Whether to enable alarm actions for \"cluster-enabled\" autoscaling."
+  default     = true
 }
 
 variable "redis_apply_immediately" {
