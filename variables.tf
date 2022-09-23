@@ -34,15 +34,9 @@ variable "redis_port" {
   default     = 6379
 }
 
-variable "redis_failover" {
-  type        = bool
-  description = "Whether to enable failover with multi-AZ. Ignored if using \"instance\" cluster_mode."
-  default     = false
-}
-
 variable "redis_multi_az" {
   type        = bool
-  description = "Whether to enable multi-AZ. Must correspond with redis_failover."
+  description = "Whether to enable multi-AZ. Enabling this also enables automatic failover."
   default     = false
 }
 
