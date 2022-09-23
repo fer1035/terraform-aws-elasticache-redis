@@ -45,5 +45,4 @@ resource "aws_elasticache_cluster" "cluster_disabled" {
 
   cluster_id                  = "${aws_elasticache_replication_group.redis_cluster_disabled[0].replication_group_id}-${count.index}"
   replication_group_id        = aws_elasticache_replication_group.redis_cluster_disabled[0].replication_group_id
-  preferred_cache_cluster_azs = var.redis_cluster_azs
 }
