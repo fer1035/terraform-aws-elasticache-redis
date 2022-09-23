@@ -35,13 +35,13 @@ resource "aws_elasticache_replication_group" "redis_cluster_disabled" {
   }
 
   log_delivery_configuration {
-    destination       = aws_cloudwatch_log_group.log_group.name
+    destination       = aws_cloudwatch_log_group.slow_logs.name
     destination_type  = "cloudwatch-logs"
     log_format        = "json"  # or "text"
     log_type          = "slow-log"
   }
   log_delivery_configuration {
-    destination       = aws_cloudwatch_log_group.log_group.name
+    destination       = aws_cloudwatch_log_group.engine_logs.name
     destination_type  = "cloudwatch-logs"
     log_format       = "json"  # or "text"
     log_type         = "engine-log"
@@ -99,13 +99,13 @@ resource "aws_elasticache_replication_group" "redis_cluster_enabled" {
   } */
 
   log_delivery_configuration {
-    destination       = aws_cloudwatch_log_group.log_group.name
+    destination       = aws_cloudwatch_log_group.slow_logs.name
     destination_type  = "cloudwatch-logs"
     log_format        = "json"  # or "text"
     log_type          = "slow-log"
   }
   log_delivery_configuration {
-    destination       = aws_cloudwatch_log_group.log_group.name
+    destination       = aws_cloudwatch_log_group.engine_logs.name
     destination_type  = "cloudwatch-logs"
     log_format       = "json"  # or "text"
     log_type         = "engine-log"
