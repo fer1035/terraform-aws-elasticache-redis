@@ -1,3 +1,8 @@
+output "redis_port" {
+  description = "Redis connection port."
+  value       = var.redis_port
+}
+
 output "log_group" {
   description = "CloudWatch Logs group for the Redis application."
   value       = aws_cloudwatch_log_group.log_group.arn

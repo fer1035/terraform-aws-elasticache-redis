@@ -7,7 +7,7 @@ variable "description" {
 variable "cluster_mode" {
   type        = string
   description = "Whether to deploy Redis as \"instance\", \"cluster-disabled\", or \"cluster-enabled\"."
-  default     = "instance"
+  default     = "cluster-disabled"
 }
 
 variable "autoscaling_enabled" {
@@ -25,7 +25,7 @@ variable "redis_id" {
 variable "redis_node_type" {
   type        = string
   description = "Node type."
-  default     = "cache.t2.small"
+  default     = "cache.t4g.micro"
 }
 
 variable "redis_port" {
@@ -37,25 +37,25 @@ variable "redis_port" {
 variable "redis_failover" {
   type        = bool
   description = "Whether to enable failover with multi-AZ. Ignored if using \"instance\" cluster_mode."
-  default     = true
+  default     = false
 }
 
 variable "redis_multi_az" {
   type        = bool
   description = "Whether to enable multi-AZ. Must correspond with redis_failover."
-  default     = true
+  default     = false
 }
 
 variable "redis_cluster_azs" {
   type        = list(string)
   description = "List of preferred Availability Zones. The first value will be used for Primary node and AZ for \"instance\" cluster_mode."
-  default     = ["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d", "us-east-1e", "us-east-1f"]
+  default     = null  # ["us-east-1a"]
 }
 
 variable "redis_num_cache_clusters" {
   type        = number
   description = "Number of cache clusters. Only for \"cluster-disabled\" cluster_mode."
-  default     = 2
+  default     = 1
 }
 
 variable "redis_num_node_groups" {
@@ -78,7 +78,7 @@ variable "redis_max_node_groups" {
 
 variable "redis_max_replicas" {
   type        = number
-  description = "Maximum number of replicas in a node group for \"cluster-enabled\" autoscaling."
+  description = "Maximum number of replicas in a node group for \"cluster-enabled\" autoscaling. Absolute maximum is 5."
   default     = 5
 }
 
@@ -181,7 +181,7 @@ variable "redis_alarm_enabled" {
 variable "redis_apply_immediately" {
   type        = bool
   description = "Whether to apply changes immediately or during next maintenance window."
-  default     = false
+  default     = true
 }
 
 variable "redis_auto_minor_version_upgrade" {
@@ -211,6 +211,7 @@ variable "redis_sgids" {
 variable "redis_subnet_ids" {
   type        = list(string)
   description = "List of Subnet IDs in which to create the Redis application."
+  default     = null
 }
 
 variable "redis_at_rest_encryption" {
@@ -263,7 +264,7 @@ variable "redis_snapshot_retention_limit" {
 
 variable "redis_final_snapshot_name" {
   type        = string
-  description = "Name of the final snapshot for the Redis cache data. Must be unique."
+  description = "Name of the final snapshot for the Redis cache data. Must be unique and starts with a letter."
 }
 
 variable "parameter_group_name" {
@@ -278,22 +279,10 @@ variable "parameter_group_family" {
   default     = "redis6.x"
 }
 
-variable "log_group_name" {
-  type        = string
-  description = "Name of the log group."
-  default     = "redis"
-}
-
 variable "log_group_retention" {
   type        = number
   description = "Number of days to keep logs. 0 means indefinitely."
   default     = 0
-}
-
-variable "sns_topic_name" {
-  type        = string
-  description = "Name of the SNS topic to deliver notifications."
-  default     = null
 }
 
 variable "user_id" {

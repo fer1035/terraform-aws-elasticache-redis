@@ -28,7 +28,7 @@ resource "aws_elasticache_cluster" "cluster_instance" {
   }
 }
 
-resource "aws_elasticache_cluster" "cluster_disabled" {
+/* resource "aws_elasticache_cluster" "cluster_disabled" {
   count = var.cluster_mode == "cluster-disabled" ? 1 : 0
 
   cluster_id           = "${aws_elasticache_replication_group.redis_cluster_disabled[0].replication_group_id}-${count.index}"
@@ -40,4 +40,4 @@ resource "aws_elasticache_cluster" "cluster_disabled" {
     log_format        = "text"
     log_type          = "slow-log"
   }
-}
+} */

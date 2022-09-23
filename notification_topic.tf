@@ -1,3 +1,3 @@
 resource "aws_sns_topic" "topic" {
-  name = var.sns_topic_name
+  name = "${var.redis_id}-sns-topic"
 }
