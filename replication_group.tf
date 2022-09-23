@@ -37,13 +37,19 @@ resource "aws_elasticache_replication_group" "redis_cluster_disabled" {
   log_delivery_configuration {
     destination       = aws_cloudwatch_log_group.log_group.name
     destination_type  = "cloudwatch-logs"
-    log_format        = "text"
+    log_format        = "json"  # or "text"
     log_type          = "slow-log"
+  }
+  log_delivery_configuration {
+    destination       = aws_cloudwatch_log_group.log_group.name
+    destination_type  = "cloudwatch-logs"
+    log_format       = "json"  # or "text"
+    log_type         = "engine-log"
   }
   /* log_delivery_configuration {
     destination      = aws_kinesis_firehose_delivery_stream.example.name
     destination_type = "kinesis-firehose"
-    log_format       = "json"
+    log_format       = "json"  # or "text"
     log_type         = "engine-log"
   } */
 
@@ -95,9 +101,21 @@ resource "aws_elasticache_replication_group" "redis_cluster_enabled" {
   log_delivery_configuration {
     destination       = aws_cloudwatch_log_group.log_group.name
     destination_type  = "cloudwatch-logs"
-    log_format        = "text"
+    log_format        = "json"  # or "text"
     log_type          = "slow-log"
   }
+  log_delivery_configuration {
+    destination       = aws_cloudwatch_log_group.log_group.name
+    destination_type  = "cloudwatch-logs"
+    log_format       = "json"  # or "text"
+    log_type         = "engine-log"
+  }
+  /* log_delivery_configuration {
+    destination      = aws_kinesis_firehose_delivery_stream.example.name
+    destination_type = "kinesis-firehose"
+    log_format       = "json"  # or "text"
+    log_type         = "engine-log"
+  } */
 
   timeouts {
     create = "60m"
