@@ -3,9 +3,14 @@ output "redis_port" {
   value       = var.redis_port
 }
 
-output "log_group" {
+output "slow_logs" {
   description = "CloudWatch Logs group for the Redis application."
-  value       = aws_cloudwatch_log_group.log_group.arn
+  value       = aws_cloudwatch_log_group.slow_logs.arn
+}
+
+output "engine_logs" {
+  description = "CloudWatch Logs group for the Redis engine."
+  value       = aws_cloudwatch_log_group.engine_logs.arn
 }
 
 output "sns_topic" {
