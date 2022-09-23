@@ -49,8 +49,8 @@ variable "redis_cluster_azs" {
 /* variable "redis_num_cache_clusters" {
   type        = number
   description = "Number of cache clusters. Only for \"cluster-disabled\" cluster_mode. Minimum should be 2 for separate Primary and Read-Replica."
-  default     = 2 */
-}
+  default     = 2
+} */
 
 variable "redis_num_node_groups" {
   type        = number
