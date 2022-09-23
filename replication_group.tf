@@ -6,7 +6,6 @@ resource "aws_elasticache_replication_group" "redis_cluster_disabled" {
   node_type                   = var.redis_node_type
   port                        = var.redis_port
   parameter_group_name        = aws_elasticache_parameter_group.parameter_group_nocluster[0].name
-  automatic_failover_enabled  = var.redis_failover
   num_cache_clusters          = var.redis_num_cache_clusters
   preferred_cache_cluster_azs = var.redis_cluster_azs
   data_tiering_enabled        = var.redis_data_tiering
@@ -16,14 +15,15 @@ resource "aws_elasticache_replication_group" "redis_cluster_disabled" {
   transit_encryption_enabled = var.redis_transit_encryption
   auth_token                 = var.redis_auth_token
 
-  engine                    = var.redis_engine_type
-  engine_version            = var.redis_engine_version
-  snapshot_retention_limit  = var.redis_snapshot_retention_limit
-  final_snapshot_identifier = var.redis_final_snapshot_name != null ? "${var.redis_final_snapshot_name}-rep-grp-final-snapshot" : null
-  multi_az_enabled          = var.redis_multi_az
-  notification_topic_arn    = aws_sns_topic.topic.arn
-  security_group_ids        = var.redis_sgids
-  subnet_group_name         = length(aws_elasticache_subnet_group.subnet_group) > 0 ? aws_elasticache_subnet_group.subnet_group[0].name : null
+  engine                      = var.redis_engine_type
+  engine_version              = var.redis_engine_version
+  snapshot_retention_limit    = var.redis_snapshot_retention_limit
+  final_snapshot_identifier   = var.redis_final_snapshot_name != null ? "${var.redis_final_snapshot_name}-rep-grp-final-snapshot" : null
+  multi_az_enabled            = var.redis_multi_az
+  automatic_failover_enabled  = var.redis_multi_az
+  notification_topic_arn      = aws_sns_topic.topic.arn
+  security_group_ids          = var.redis_sgids
+  subnet_group_name           = length(aws_elasticache_subnet_group.subnet_group) > 0 ? aws_elasticache_subnet_group.subnet_group[0].name : null
 
   apply_immediately          = var.redis_apply_immediately
   auto_minor_version_upgrade = var.redis_auto_minor_version_upgrade
@@ -62,8 +62,7 @@ resource "aws_elasticache_replication_group" "redis_cluster_enabled" {
   node_type                   = var.redis_node_type
   port                        = var.redis_port
   parameter_group_name        = aws_elasticache_parameter_group.parameter_group_cluster[0].name
-  automatic_failover_enabled  = var.redis_failover
-  /* preferred_cache_cluster_azs = var.redis_cluster_azs */
+  preferred_cache_cluster_azs = var.redis_cluster_azs
   data_tiering_enabled        = var.redis_data_tiering
 
   num_node_groups         = var.redis_num_node_groups
@@ -74,14 +73,15 @@ resource "aws_elasticache_replication_group" "redis_cluster_enabled" {
   transit_encryption_enabled = var.redis_transit_encryption
   auth_token                 = var.redis_auth_token
 
-  engine                    = var.redis_engine_type
-  engine_version            = var.redis_engine_version
-  snapshot_retention_limit  = var.redis_snapshot_retention_limit
-  final_snapshot_identifier = var.redis_final_snapshot_name != null ? "${var.redis_final_snapshot_name}-cluster-final-snapshot" : null
-  multi_az_enabled          = var.redis_multi_az
-  notification_topic_arn    = aws_sns_topic.topic.arn
-  security_group_ids        = var.redis_sgids
-  subnet_group_name         = length(aws_elasticache_subnet_group.subnet_group) > 0 ? aws_elasticache_subnet_group.subnet_group[0].name : null
+  engine                      = var.redis_engine_type
+  engine_version              = var.redis_engine_version
+  snapshot_retention_limit    = var.redis_snapshot_retention_limit
+  final_snapshot_identifier   = var.redis_final_snapshot_name != null ? "${var.redis_final_snapshot_name}-cluster-final-snapshot" : null
+  multi_az_enabled            = var.redis_multi_az
+  automatic_failover_enabled  = var.redis_multi_az
+  notification_topic_arn      = aws_sns_topic.topic.arn
+  security_group_ids          = var.redis_sgids
+  subnet_group_name           = length(aws_elasticache_subnet_group.subnet_group) > 0 ? aws_elasticache_subnet_group.subnet_group[0].name : null
 
   apply_immediately          = var.redis_apply_immediately
   auto_minor_version_upgrade = var.redis_auto_minor_version_upgrade
