@@ -46,21 +46,21 @@ variable "redis_cluster_azs" {
   default     = null  # ["us-east-1a"]
 }
 
-variable "redis_num_cache_clusters" {
+/* variable "redis_num_cache_clusters" {
   type        = number
   description = "Number of cache clusters. Only for \"cluster-disabled\" cluster_mode. Minimum should be 2 for separate Primary and Read-Replica."
-  default     = 2
+  default     = 2 */
 }
 
 variable "redis_num_node_groups" {
   type        = number
-  description = "Number of node groups, also minimum count for \"cluster-enabled\" autoscaling. Only for \"cluster-enabled\" cluster_mode."
+  description = "Number of node groups for \"cluster-enabled\" cluster_mode, also minimum count for \"cluster-enabled\" shard autoscaling."
   default     = 2
 }
 
 variable "redis_num_replicas" {
   type        = number
-  description = "Number of replicas in each node group, also minimum count for \"cluster-enabled\" autoscaling. Only for \"cluster-enabled\" cluster_mode."
+  description = "Number of read-replicas for \"cluster-disabled\" and \"cluster-enabled\" cluster_mode, also minimum count for \"cluster-enabled\" replica autoscaling."
   default     = 1
 }
 
