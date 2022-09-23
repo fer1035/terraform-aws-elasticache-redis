@@ -32,3 +32,8 @@ output "cluster_disabled_redis_reader_endpoint" {
   description = "Reader endpoint address of the \"cluster-disabled\" replication group."
   value       = length(aws_elasticache_replication_group.redis_cluster_disabled) > 0 ? aws_elasticache_replication_group.redis_cluster_disabled[*].reader_endpoint_address : null
 }
+
+/* output "cluster_disabled_cache_nodes" {
+  description = "Cache nodes of the \"cluster-disabled\" cluster_mode."
+  value       = length(aws_elasticache_cluster.cluster_disabled) > 0 ? aws_elasticache_cluster.cluster_disabled[*].cache_nodes : null
+} */
