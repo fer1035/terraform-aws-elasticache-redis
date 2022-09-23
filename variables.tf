@@ -264,7 +264,8 @@ variable "redis_snapshot_retention_limit" {
 
 variable "redis_final_snapshot_name" {
   type        = string
-  description = "Name of the final snapshot for the Redis cache data. Must be unique and starts with a letter."
+  description = "Name of the final snapshot for the Redis cache data. Must be unique and starts with a letter. Ignore if not creating final snapshot."
+  default     = null
 }
 
 variable "parameter_group_name" {
