@@ -19,7 +19,7 @@ resource "aws_elasticache_replication_group" "redis_cluster_disabled" {
   engine                    = var.redis_engine_type
   engine_version            = var.redis_engine_version
   snapshot_retention_limit  = var.redis_snapshot_retention_limit
-  final_snapshot_identifier = "${var.redis_final_snapshot_name}-rep-grp-final-snapshot"
+  final_snapshot_identifier = var.redis_final_snapshot_name != null ? "${var.redis_final_snapshot_name}-rep-grp-final-snapshot" : null
   multi_az_enabled          = var.redis_multi_az
   notification_topic_arn    = aws_sns_topic.topic.arn
   security_group_ids        = var.redis_sgids
@@ -77,7 +77,7 @@ resource "aws_elasticache_replication_group" "redis_cluster_enabled" {
   engine                    = var.redis_engine_type
   engine_version            = var.redis_engine_version
   snapshot_retention_limit  = var.redis_snapshot_retention_limit
-  final_snapshot_identifier = "${var.redis_final_snapshot_name}-cluster-final-snapshot"
+  final_snapshot_identifier = var.redis_final_snapshot_name != null ? "${var.redis_final_snapshot_name}-cluster-final-snapshot" : null
   multi_az_enabled          = var.redis_multi_az
   notification_topic_arn    = aws_sns_topic.topic.arn
   security_group_ids        = var.redis_sgids
