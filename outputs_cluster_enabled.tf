@@ -23,7 +23,7 @@ output "cluster_enabled_redis_config_endpoint" {
   value       = length(aws_elasticache_replication_group.redis_cluster_enabled) > 0 ? aws_elasticache_replication_group.redis_cluster_enabled[*].configuration_endpoint_address : null
 }
 
-output "cluster_enabled_redis_member_clusters" {
-  description = "Member clusters of the \"cluster-enabled\" replication group."
-  value       = length(aws_elasticache_replication_group.redis_cluster_enabled) > 0 ? aws_elasticache_replication_group.redis_cluster_enabled[*].member_clusters : null
+output "cluster_enabled_cache_nodes" {
+  description = "Cache nodes of the \"cluster-enabled\" cluster_mode."
+  value       = length(aws_elasticache_cluster.cluster_emabled) > 0 ? aws_elasticache_cluster.cluster_enabled[*].cache_nodes : null
 }
