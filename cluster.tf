@@ -3,7 +3,7 @@ resource "aws_elasticache_cluster" "cluster_instance" {
 
   availability_zone         = var.redis_cluster_azs != null ? var.redis_cluster_azs[0] : null
   cluster_id                = var.redis_id
-  final_snapshot_identifier = "${var.redis_final_snapshot_name}-instance-final-snapshot"
+  final_snapshot_identifier = var.redis_final_snapshot_name != null ? "${var.redis_final_snapshot_name}-instance-final-snapshot" : null
   node_type                 = var.redis_node_type
   notification_topic_arn    = aws_sns_topic.topic.arn
   num_cache_nodes           = 1
