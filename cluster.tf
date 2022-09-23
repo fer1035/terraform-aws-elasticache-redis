@@ -45,23 +45,5 @@ resource "aws_elasticache_cluster" "cluster_disabled" {
 
   cluster_id           = "${aws_elasticache_replication_group.redis_cluster_disabled[0].replication_group_id}-${count.index}"
   replication_group_id = aws_elasticache_replication_group.redis_cluster_disabled[0].replication_group_id
-
-  log_delivery_configuration {
-    destination      = aws_cloudwatch_log_group.slow_logs.name
-    destination_type = "cloudwatch-logs"
-    log_format       = "json"  # or "text"
-    log_type         = "slow-log"
-  }
-  log_delivery_configuration {
-    destination      = aws_cloudwatch_log_group.engine_logs.name
-    destination_type = "cloudwatch-logs"
-    log_format       = "json"  # or "text"
-    log_type         = "engine-log"
-  }
-  /* log_delivery_configuration {
-    destination      = aws_kinesis_firehose_delivery_stream.example.name
-    destination_type = "kinesis-firehose"
-    log_format       = "json"  # or "text"
-    log_type         = "engine-log"
-  } */
+  availability_zone    = var.redis_cluster_azs != null ? var.redis_cluster_azs[0] : null
 }
