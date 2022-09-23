@@ -60,7 +60,7 @@ variable "redis_num_node_groups" {
 
 variable "redis_num_replicas" {
   type        = number
-  description = "Number of replicas in each node group, also minimum count for \"cluster-enabled\" autoscaling. Only for \"cluster-enabled\" cluster_mode.""
+  description = "Number of replicas in each node group, also minimum count for \"cluster-enabled\" autoscaling. Only for \"cluster-enabled\" cluster_mode."
   default     = 1
 }
 
