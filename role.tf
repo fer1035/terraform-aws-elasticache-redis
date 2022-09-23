@@ -24,7 +24,10 @@ EOF
         {
           Effect   = "Allow"
           Action   = "logs:*"
-          Resource = aws_cloudwatch_log_group.log_group.arn
+          Resource = [
+            aws_cloudwatch_log_group.slow_logs.arn,
+            aws_cloudwatch_log_group.engine_logs.arn
+          ]
         },
         {
           Effect   = "Allow"
