@@ -23,7 +23,7 @@ resource "aws_elasticache_replication_group" "redis_cluster_disabled" {
   multi_az_enabled          = var.redis_multi_az
   notification_topic_arn    = aws_sns_topic.topic.arn
   security_group_ids        = var.redis_sgids
-  subnet_group_name         = aws_elasticache_subnet_group.subnet_group.name
+  subnet_group_name         = length(aws_elasticache_subnet_group.subnet_group) > 0 ? aws_elasticache_subnet_group.subnet_group.name : null
 
   apply_immediately          = var.redis_apply_immediately
   auto_minor_version_upgrade = var.redis_auto_minor_version_upgrade
@@ -81,7 +81,7 @@ resource "aws_elasticache_replication_group" "redis_cluster_enabled" {
   multi_az_enabled          = var.redis_multi_az
   notification_topic_arn    = aws_sns_topic.topic.arn
   security_group_ids        = var.redis_sgids
-  subnet_group_name         = aws_elasticache_subnet_group.subnet_group.name
+  subnet_group_name         = length(aws_elasticache_subnet_group.subnet_group) > 0 ? aws_elasticache_subnet_group.subnet_group.name : null
 
   apply_immediately          = var.redis_apply_immediately
   auto_minor_version_upgrade = var.redis_auto_minor_version_upgrade

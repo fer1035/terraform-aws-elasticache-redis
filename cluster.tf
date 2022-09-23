@@ -1,7 +1,7 @@
 resource "aws_elasticache_cluster" "cluster_instance" {
   count = var.cluster_mode == "instance" ? 1 : 0
 
-  availability_zone         = var.redis_cluster_azs[0]
+  availability_zone         = var.redis_cluster_azs != null ? var.redis_cluster_azs[0] : null
   cluster_id                = var.redis_id
   final_snapshot_identifier = "${var.redis_final_snapshot_name}-instance-final-snapshot"
   node_type                 = var.redis_node_type
@@ -13,7 +13,7 @@ resource "aws_elasticache_cluster" "cluster_instance" {
   snapshot_retention_limit  = var.redis_snapshot_retention_limit
   port                      = var.redis_port
   security_group_ids        = var.redis_sgids
-  subnet_group_name         = aws_elasticache_subnet_group.subnet_group.name
+  subnet_group_name         = length(aws_elasticache_subnet_group.subnet_group) > 0 ? aws_elasticache_subnet_group.subnet_group.name : null
 
   apply_immediately          = var.redis_apply_immediately
   auto_minor_version_upgrade = var.redis_auto_minor_version_upgrade
