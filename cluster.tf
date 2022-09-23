@@ -13,7 +13,7 @@ resource "aws_elasticache_cluster" "cluster_instance" {
   snapshot_retention_limit  = var.redis_snapshot_retention_limit
   port                      = var.redis_port
   security_group_ids        = var.redis_sgids
-  subnet_group_name         = length(aws_elasticache_subnet_group.subnet_group) > 0 ? aws_elasticache_subnet_group.subnet_group.name : null
+  subnet_group_name         = length(aws_elasticache_subnet_group.subnet_group) > 0 ? aws_elasticache_subnet_group.subnet_group[0].name : null
 
   apply_immediately          = var.redis_apply_immediately
   auto_minor_version_upgrade = var.redis_auto_minor_version_upgrade
