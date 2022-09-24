@@ -6,7 +6,7 @@ resource "aws_elasticache_replication_group" "redis_cluster_disabled" {
   node_type                   = var.redis_node_type
   port                        = var.redis_port
   parameter_group_name        = aws_elasticache_parameter_group.parameter_group_nocluster[0].name
-  /* num_cache_clusters          = var.redis_num_cache_clusters */
+  num_cache_clusters          = var.redis_num_cache_clusters
   preferred_cache_cluster_azs = var.redis_cluster_azs
   data_tiering_enabled        = var.redis_data_tiering
 
