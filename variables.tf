@@ -36,9 +36,16 @@ variable "redis_port" {
 
 variable "redis_multi_az" {
   type        = bool
-  description = "Whether to enable multi-AZ. Enabling this also enables automatic failover."
+  description = "Whether to enable multi-AZ. Enabling this will automatically enable automatic failover."
   default     = false
 }
+
+variable "redis_auto_failover" {
+  type        = bool
+  description = "Whether to enable automatic failover. Automatically enabled if Multi-AZ is enabled."
+  default     = false
+}
+
 
 variable "redis_cluster_azs" {
   type        = list(string)

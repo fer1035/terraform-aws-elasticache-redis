@@ -20,7 +20,7 @@ resource "aws_elasticache_replication_group" "redis_cluster_disabled" {
   snapshot_retention_limit    = var.redis_snapshot_retention_limit
   final_snapshot_identifier   = var.redis_final_snapshot_name != null ? "${var.redis_final_snapshot_name}-rep-grp-final-snapshot" : null
   multi_az_enabled            = var.redis_multi_az
-  automatic_failover_enabled  = var.redis_multi_az
+  automatic_failover_enabled  = var.redis_multi_az == true ? true : var.redis_auto_failover
   notification_topic_arn      = aws_sns_topic.topic.arn
   security_group_ids          = var.redis_sgids
   subnet_group_name           = length(aws_elasticache_subnet_group.subnet_group) > 0 ? aws_elasticache_subnet_group.subnet_group[0].name : null
@@ -84,7 +84,7 @@ resource "aws_elasticache_replication_group" "redis_cluster_enabled" {
   snapshot_retention_limit    = var.redis_snapshot_retention_limit
   final_snapshot_identifier   = var.redis_final_snapshot_name != null ? "${var.redis_final_snapshot_name}-cluster-final-snapshot" : null
   multi_az_enabled            = var.redis_multi_az
-  automatic_failover_enabled  = var.redis_multi_az
+  automatic_failover_enabled  = true
   notification_topic_arn      = aws_sns_topic.topic.arn
   security_group_ids          = var.redis_sgids
   subnet_group_name           = length(aws_elasticache_subnet_group.subnet_group) > 0 ? aws_elasticache_subnet_group.subnet_group[0].name : null
