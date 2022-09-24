@@ -42,7 +42,7 @@ variable "redis_multi_az" {
 
 variable "redis_auto_failover" {
   type        = bool
-  description = "Whether to enable automatic failover. Automatically enabled if Multi-AZ is enabled."
+  description = "Whether to enable automatic failover. Automatically enabled for \"cluster-enabled\" cluster_mode, and if Multi-AZ is enabled."
   default     = false
 }
 
