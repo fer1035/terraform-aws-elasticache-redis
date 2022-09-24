@@ -48,20 +48,20 @@ variable "redis_cluster_azs" {
 
 variable "redis_num_cache_clusters" {
   type        = number
-  description = "Number of cache clusters for \"cluster-disabled\" cluster_mode. Minimum should be 2 for Multi-AZ and automatic failover."
+  description = "Number of nodes for \"cluster-disabled\" cluster_mode. Minimum should be 2 for Multi-AZ and automatic failover, where one is Primary and the other is Read-Replica. Refer to service quotas special notes in the README."
   default     = 2
+}
+
+variable "redis_num_replicas" {
+  type        = number
+  description = "Number of Read-Replicas for \"cluster-enabled\" cluster_mode, and additional Read-Replicas for \"cluster-disabled\" cluster_mode. Also minimum count for \"cluster-enabled\" replica autoscaling. Refer to service quotas special notes in the README."
+  default     = 1
 }
 
 variable "redis_num_node_groups" {
   type        = number
   description = "Number of node groups for \"cluster-enabled\" cluster_mode, also minimum count for \"cluster-enabled\" shard autoscaling."
   default     = 2
-}
-
-variable "redis_num_replicas" {
-  type        = number
-  description = "Number of read-replicas for \"cluster-disabled\" and \"cluster-enabled\" cluster_mode, also minimum count for \"cluster-enabled\" replica autoscaling."
-  default     = 1
 }
 
 variable "redis_max_node_groups" {
