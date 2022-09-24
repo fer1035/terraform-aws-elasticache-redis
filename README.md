@@ -89,4 +89,4 @@ Persistence is not available in this module due to the following reasons:
 
 - It is only available for Redis versions prior to 2.8.22.
 - It is not available for Multi-AZ.
-- AWS [outlines](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/RedisAOF.html) several issues with using Append-Only-File (AOF) for persistence, and advises using Multi-AZ and automatic failover for better reliabiliry and faster recovery.
+- AWS [outlines](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/RedisAOF.html) several issues with using Append-Only-File (AOF) for persistence, and advises using Multi-AZ and automatic failover for better reliability and faster recovery.
