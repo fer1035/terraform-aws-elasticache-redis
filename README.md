@@ -14,7 +14,7 @@ Different AWS ElastiCache Redis implementation types:
 | :---: | :---: | :---: | :---: |
 | Shard | No | Single | Single or Multiple |
 | Multi-AZ | No | Possible | Possible |
-| Auto-Failover | No | Possible | Possible |
+| Auto-Failover | No | Possible | Yes |
 | Scaling | Node scale-up | Primary node scale-up, Read-Replica scale-up and scale-out | Primary node scale-up, Read-Replica scale-up and scale-out, shard scale-out |
 | Autoscaling | No | No | Possible |
 | Partitioning | No | No | Possible (with multiple shards) |
@@ -82,3 +82,11 @@ Calculation examples for maximum autoscaling [limits](https://docs.aws.amazon.co
         - 500 / 6 = 83.333, therefore 83 shards
     - Redis prior to 5.0.6:
         - 90 / 6 = 15 shards
+
+### Persistence
+
+Persistence is not available in this module due to the following reasons:
+
+- It is only available for Redis versions prior to 2.8.22.
+- It is not available for Multi-AZ.
+- AWS [outlines](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/RedisAOF.html) several issues with using Append-Only-File (AOF) for persistence, and advises using Multi-AZ and automatic failover for better reliabiliry and faster recovery.
