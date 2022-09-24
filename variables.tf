@@ -46,11 +46,11 @@ variable "redis_cluster_azs" {
   default     = null  # ["us-east-1a"]
 }
 
-/* variable "redis_num_cache_clusters" {
+variable "redis_num_cache_clusters" {
   type        = number
-  description = "Number of cache clusters. Only for \"cluster-disabled\" cluster_mode. Minimum should be 2 for separate Primary and Read-Replica."
+  description = "Number of cache clusters for \"cluster-disabled\" cluster_mode. Minimum should be 2 for Multi-AZ and automatic failover."
   default     = 2
-} */
+}
 
 variable "redis_num_node_groups" {
   type        = number
@@ -66,13 +66,13 @@ variable "redis_num_replicas" {
 
 variable "redis_max_node_groups" {
   type        = number
-  description = "Maximum number of node groups for \"cluster-enabled\" autoscaling."
+  description = "Maximum number of node groups for \"cluster-enabled\" autoscaling. Refer to service quotas special notes in the README."
   default     = 10
 }
 
 variable "redis_max_replicas" {
   type        = number
-  description = "Maximum number of replicas in a node group for \"cluster-enabled\" autoscaling. Absolute maximum is 5."
+  description = "Maximum number of replicas in a node group for \"cluster-enabled\" autoscaling. Refer to service quotas special notes in the README."
   default     = 5
 }
 
