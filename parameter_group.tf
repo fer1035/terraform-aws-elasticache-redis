@@ -9,9 +9,10 @@ resource "aws_elasticache_parameter_group" "parameter_group_nocluster" {
     value = "yes"
   }
 
-  /* parameter {
-    name  = "min-slaves-to-write"
-    value = "2"
+  /* # This is only good for Single-AZ in Redis versions prior to 2.8.22.
+    parameter {
+    name  = "appendonly"
+    value = "yes"
   } */
 }
 
@@ -25,11 +26,6 @@ resource "aws_elasticache_parameter_group" "parameter_group_cluster" {
     name  = "activerehashing"
     value = "yes"
   }
-
-  /* parameter {
-    name  = "min-slaves-to-write"
-    value = "2"
-  } */
 
   parameter {
     name  = "cluster-enabled"
