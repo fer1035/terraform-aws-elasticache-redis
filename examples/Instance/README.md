@@ -24,7 +24,7 @@ Example for: Instance
 
       default_tags {
         tags = {
-          Name = "Redis-Cluster-Disabled"
+          Name = "Redis-Instance"
         }
       }
     }

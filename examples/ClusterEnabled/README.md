@@ -24,7 +24,7 @@ Example for: Cluster-Enabled
 
       default_tags {
         tags = {
-          Name = "Redis-Cluster-Disabled"
+          Name = "Redis-Cluster-Enabled"
         }
       }
     }
