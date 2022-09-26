@@ -3,7 +3,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Name = "Redis-Cluster-Disabled"
+      Name = "Redis-Cluster-Enabled"
     }
   }
 }
