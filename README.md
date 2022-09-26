@@ -47,7 +47,7 @@ The defaults for this module create:
 - 2 users and a user group without authentication (no password by default).
 - No encryption.
 - No final snapshot.
-- All resources in an AWS *default* VPC (will cause an error if there is none, and you will need to configure it with a non-default VPC inputs instead).
+- All resources in an AWS *default* VPC (will cause an error if there is none, and you will need to configure it with non-default-VPC inputs instead).
 
 ### Autoscaling
 

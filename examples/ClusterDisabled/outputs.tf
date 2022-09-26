@@ -18,11 +18,6 @@ output "cluster_disabled_redis_cluster_enabled" {
   value       = module.redis_cluster_disabled.cluster_disabled_redis_cluster_enabled
 }
 
-output "cluster_disabled_redis_config_endpoint" {
-  description = "Configuration endpoint address of the \"cluster-disabled\" replication group."
-  value       = module.redis_cluster_disabled.cluster_disabled_redis_config_endpoint
-}
-
 output "cluster_disabled_redis_member_clusters" {
   description = "Member clusters of the \"cluster-disabled\" replication group."
   value       = module.redis_cluster_disabled.cluster_disabled_redis_member_clusters
@@ -41,4 +36,24 @@ output "cluster_disabled_redis_reader_endpoint" {
 output "cluster_disabled_cache_nodes" {
   description = "Cache nodes of the \"cluster-disabled\" cluster_mode."
   value       = module.redis_cluster_disabled.cluster_disabled_cache_nodes
+}
+
+output "redis_port" {
+  description = "Redis connection port."
+  value       = var.redis_port
+}
+
+output "slow_logs" {
+  description = "CloudWatch Logs group for the Redis application."
+  value       = aws_cloudwatch_log_group.slow_logs.arn
+}
+
+output "engine_logs" {
+  description = "CloudWatch Logs group for the Redis engine."
+  value       = aws_cloudwatch_log_group.engine_logs.arn
+}
+
+output "sns_topic" {
+  description = "SNS notification topic for the Redis application."
+  value       = aws_sns_topic.topic.arn
 }
