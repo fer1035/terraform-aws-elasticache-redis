@@ -13,3 +13,21 @@ Example for: Cluster-Enabled
 | Connection | Configuration endpoint (Primary and Reader configuration managed by cluster and transparent to user)
 | Authentication | Possible |
 | Encryption | Possible |
+
+## Prerequisites
+
+1. You will need to define a *region* and (optionally) some *default tags* using the *provider* block:
+
+    ```hcl
+    provider "aws" {
+      region = "us-east-1"
+
+      default_tags {
+        tags = {
+          Name = "Redis-Cluster-Disabled"
+        }
+      }
+    }
+    ```
+
+2. The example creates its own VPC and Security Group for the Redis cluster.
