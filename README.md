@@ -8,7 +8,7 @@ A Terraform module to provision AWS ElastiCache Redis.
 
 Different AWS ElastiCache Redis implementation types:
 
-![AWS ElastiCache Redis types](img/redis.png)
+![Image: AWS ElastiCache Redis types deployed by this module.](https://raw.githubusercontent.com/fer1035/terraform-aws-elasticache-redis/main/img/readme.png)
 
 | Feature | Instance | Cluster-Disabled | Cluster-Enabled |
 | :---: | :---: | :---: | :---: |
