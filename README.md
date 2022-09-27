@@ -1,6 +1,15 @@
-# AWS Elasticache Redis Terraform Module
+# AWS ElastiCache Redis Terraform Module
 
-A Terraform module to provision AWS ElastiCache Redis.
+A Terraform module to provision AWS ElastiCache Redis, an unstructured in-memory caching database where data is stored as key-value pairs.
+
+```bash
+redis_endpoint:redis_port> SET x "hello"
+OK
+redis_endpoint:redis_port> KEYS *
+1) "x"
+redis_endpoint:redis_port> GET x
+hello
+```
 
 ---
 
