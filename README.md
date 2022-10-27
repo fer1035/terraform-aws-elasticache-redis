@@ -195,6 +195,7 @@ No modules.
 | <a name="input_redis_trigger_percent_node_groups"></a> [redis\_trigger\_percent\_node\_groups](#input\_redis\_trigger\_percent\_node\_groups) | Node group database memory percentage amount to trigger for "cluster-enabled" autoscaling. | `number` | `75` | no |
 | <a name="input_redis_trigger_percent_replicas"></a> [redis\_trigger\_percent\_replicas](#input\_redis\_trigger\_percent\_replicas) | Replica CPU utilization percentage amount to trigger for "cluster-enabled" autoscaling. | `number` | `65` | no |
 | <a name="input_user_access_string"></a> [user\_access\_string](#input\_user\_access\_string) | Access string for the Redis user. | `string` | `"on ~app::* -@all +@read +@hash +@bitmap +@geo -setbit -bitfield -hset -hsetnx -hmset -hincrby -hincrbyfloat -hdel -bitop -geoadd -georadius -georadiusbymember"` | no |
+| <a name="input_default_user_id"></a> [default\_user\_id](#input\_default\_user\_id) | ID of the default Redis user. Lowercase letters only. | `string` | `"defaultuserid"` | no |
 | <a name="input_user_id"></a> [user\_id](#input\_user\_id) | ID of the Redis user. | `string` | `"redisuserid"` | no |
 | <a name="input_user_name"></a> [user\_name](#input\_user\_name) | Name of the Redis user. | `string` | `"redisUser"` | no |
 | <a name="input_user_no_password"></a> [user\_no\_password](#input\_user\_no\_password) | Whether to allow no password for the user. Must be false if user\_passwords is set. | `bool` | `true` | no |
