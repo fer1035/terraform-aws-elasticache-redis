@@ -43,8 +43,8 @@ resource "aws_elasticache_cluster" "cluster_instance" {
 resource "aws_elasticache_cluster" "cluster_disabled" {
   count = var.cluster_mode == "cluster-disabled" ? var.redis_num_replicas : 0
 
-  cluster_id                  = "${aws_elasticache_replication_group.redis_cluster_disabled[0].replication_group_id}-${count.index}"
-  replication_group_id        = aws_elasticache_replication_group.redis_cluster_disabled[0].replication_group_id
+  cluster_id           = "${aws_elasticache_replication_group.redis_cluster_disabled[0].replication_group_id}-${count.index}"
+  replication_group_id = aws_elasticache_replication_group.redis_cluster_disabled[0].replication_group_id
 
   lifecycle {
     ignore_changes = [notification_topic_arn]

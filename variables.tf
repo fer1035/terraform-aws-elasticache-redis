@@ -287,6 +287,12 @@ variable "log_group_retention" {
   default     = 0
 }
 
+variable "default_user_id" {
+  type        = string
+  description = "ID of the default Redis user. Lowercase letters only."
+  default     = "defaultuserid"
+}
+
 variable "user_id" {
   type        = string
   description = "ID of the Redis user."
