@@ -1,5 +1,5 @@
 resource "aws_elasticache_user" "default_user" {
-  user_id              = "defaultuserid"
+  user_id              = var.default_user_id
   user_name            = "default"
   access_string        = var.user_access_string
   engine               = "REDIS"

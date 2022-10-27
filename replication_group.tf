@@ -15,15 +15,15 @@ resource "aws_elasticache_replication_group" "redis_cluster_disabled" {
   transit_encryption_enabled = var.redis_transit_encryption
   auth_token                 = var.redis_auth_token
 
-  engine                      = var.redis_engine_type
-  engine_version              = var.redis_engine_version
-  snapshot_retention_limit    = var.redis_snapshot_retention_limit
-  final_snapshot_identifier   = var.redis_final_snapshot_name != null ? "${var.redis_final_snapshot_name}-rep-grp-final-snapshot" : null
-  multi_az_enabled            = var.redis_multi_az
-  automatic_failover_enabled  = var.redis_multi_az == true ? true : var.redis_auto_failover
-  notification_topic_arn      = aws_sns_topic.topic.arn
-  security_group_ids          = var.redis_sgids
-  subnet_group_name           = length(aws_elasticache_subnet_group.subnet_group) > 0 ? aws_elasticache_subnet_group.subnet_group[0].name : null
+  engine                     = var.redis_engine_type
+  engine_version             = var.redis_engine_version
+  snapshot_retention_limit   = var.redis_snapshot_retention_limit
+  final_snapshot_identifier  = var.redis_final_snapshot_name != null ? "${var.redis_final_snapshot_name}-rep-grp-final-snapshot" : null
+  multi_az_enabled           = var.redis_multi_az
+  automatic_failover_enabled = var.redis_multi_az == true ? true : var.redis_auto_failover
+  notification_topic_arn     = aws_sns_topic.topic.arn
+  security_group_ids         = var.redis_sgids
+  subnet_group_name          = length(aws_elasticache_subnet_group.subnet_group) > 0 ? aws_elasticache_subnet_group.subnet_group[0].name : null
 
   apply_immediately          = var.redis_apply_immediately
   auto_minor_version_upgrade = var.redis_auto_minor_version_upgrade
@@ -35,14 +35,14 @@ resource "aws_elasticache_replication_group" "redis_cluster_disabled" {
   }
 
   log_delivery_configuration {
-    destination       = aws_cloudwatch_log_group.slow_logs.name
-    destination_type  = "cloudwatch-logs"
-    log_format        = "json"  # or "text"
-    log_type          = "slow-log"
+    destination      = aws_cloudwatch_log_group.slow_logs.name
+    destination_type = "cloudwatch-logs"
+    log_format       = "json"  # or "text"
+    log_type         = "slow-log"
   }
   log_delivery_configuration {
-    destination       = aws_cloudwatch_log_group.engine_logs.name
-    destination_type  = "cloudwatch-logs"
+    destination      = aws_cloudwatch_log_group.engine_logs.name
+    destination_type = "cloudwatch-logs"
     log_format       = "json"  # or "text"
     log_type         = "engine-log"
   }
@@ -79,15 +79,15 @@ resource "aws_elasticache_replication_group" "redis_cluster_enabled" {
   transit_encryption_enabled = var.redis_transit_encryption
   auth_token                 = var.redis_auth_token
 
-  engine                      = var.redis_engine_type
-  engine_version              = var.redis_engine_version
-  snapshot_retention_limit    = var.redis_snapshot_retention_limit
-  final_snapshot_identifier   = var.redis_final_snapshot_name != null ? "${var.redis_final_snapshot_name}-cluster-final-snapshot" : null
-  multi_az_enabled            = var.redis_multi_az
-  automatic_failover_enabled  = true
-  notification_topic_arn      = aws_sns_topic.topic.arn
-  security_group_ids          = var.redis_sgids
-  subnet_group_name           = length(aws_elasticache_subnet_group.subnet_group) > 0 ? aws_elasticache_subnet_group.subnet_group[0].name : null
+  engine                     = var.redis_engine_type
+  engine_version             = var.redis_engine_version
+  snapshot_retention_limit   = var.redis_snapshot_retention_limit
+  final_snapshot_identifier  = var.redis_final_snapshot_name != null ? "${var.redis_final_snapshot_name}-cluster-final-snapshot" : null
+  multi_az_enabled           = var.redis_multi_az
+  automatic_failover_enabled = true
+  notification_topic_arn     = aws_sns_topic.topic.arn
+  security_group_ids         = var.redis_sgids
+  subnet_group_name          = length(aws_elasticache_subnet_group.subnet_group) > 0 ? aws_elasticache_subnet_group.subnet_group[0].name : null
 
   apply_immediately          = var.redis_apply_immediately
   auto_minor_version_upgrade = var.redis_auto_minor_version_upgrade
